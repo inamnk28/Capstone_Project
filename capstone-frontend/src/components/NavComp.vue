@@ -21,12 +21,12 @@
                          <li class="nav-item">
                             <router-link class="nav-link links text-black fw-bold fs-6 text-uppercase" to="/contact">Contact</router-link>
                          </li>
-                         <li class="nav-item pt-2 mx-1">
+                         <!-- <li class="nav-item pt-2 mx-1">
                             <router-link class="bag nav-link links text-black fw-bold fs-6 text-uppercase" to="/cart"></router-link>
                          </li>
                          <li class="nav-item mx-1">
                             <router-link class="search nav-link links text-black fw-bold fs-6 text-uppercase" to="/search"></router-link>
-                         </li>
+                         </li> -->
                       </ul>
                    </div>
                 </div>

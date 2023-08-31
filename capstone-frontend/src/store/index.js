@@ -35,13 +35,13 @@ export default createStore({
     async getProducts(context) {
       try {
         const response = await fetch(`${dbConnection}products`);
+        
         if(!response.ok) {
           throw Error("Failed to fetch products");
         } else {
           const data = await response.json();
-          const products = data.results;
+          const products = data;
           context.commit("setProducts", products);
-          console.log(products)
         }
       } catch (err) {
         context.commit("Failed to get products", err.message);
