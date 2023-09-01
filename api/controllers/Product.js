@@ -53,10 +53,28 @@ const deleteProduct = (req, res) => {
         }
     });
 }
+
+const getProductsByCategory = async (categoryId) => {
+
+    const query = `
+      SELECT * FROM products
+      WHERE category_id = ?;
+    `;
+  
+    try {
+        const results = await db.query(query, [categoryId]);
+        return results;
+      } catch (error) {
+        console.error("Error fetching products by category:", error);
+        throw error;
+      }
+  };
+
 module.exports = {
     showProducts,
     showProductById,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getProductsByCategory
 }

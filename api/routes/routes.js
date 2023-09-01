@@ -3,8 +3,9 @@ const bodyParser = require('body-parser')
 const {verifyAToken} = require('../middleware/AuthenticateUser')
 const router = express.Router()
 const productController = require("../controllers/Product");
-const cartController = require("../controllers/cartController.js");
-const ordersController = require("../controllers/ordersController.js");
+const { getProductsByCategory } = require('../controllers/Product');
+// const cartController = require("../controllers/cartController.js");
+// const ordersController = require("../controllers/ordersController.js");
 const Users = require('../models/user');
 const users = new Users();
 //Import all model's objects
@@ -51,13 +52,16 @@ router.post("/products", createProduct);
 router.put("/products/:id", updateProduct);
 router.delete("/products/:id", deleteProduct);
 
-// Cart routes
-router.post("/cart", verifyAToken, bodyParser.json(), cartController.addToCart);
-router.get("/cart/:user_id", verifyAToken, cartController.viewCart);
-router.delete("/cart/:cart_id", cartController.removeFromCart);
+// Get products by category
+router.get('/products/category/:category_id', getProductsByCategory);
 
-// Orders routes
-router.post("/orders", verifyAToken, bodyParser.json(), ordersController.placeOrder);
-router.get("/orders/:user_id", verifyAToken, ordersController.viewOrderHistory);
+// // Cart routes
+// router.post("/cart", verifyAToken, bodyParser.json(), cartController.addToCart);
+// router.get("/cart/:user_id", verifyAToken, cartController.viewCart);
+// router.delete("/cart/:cart_id", cartController.removeFromCart);
+
+// // Orders routes
+// router.post("/orders", verifyAToken, bodyParser.json(), ordersController.placeOrder);
+// router.get("/orders/:user_id", verifyAToken, ordersController.viewOrderHistory);
 
 module.exports = {router, verifyAToken};
