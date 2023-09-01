@@ -9,7 +9,8 @@ export default createStore({
     deleteProduct: null,
     users: null,
     user: null,
-    deleteUser: null
+    deleteUser: null,
+    filteredProducts: null,
   },
   mutations: {
     setProducts: (state, products) => {
@@ -29,6 +30,9 @@ export default createStore({
     },
     setDeleteUser: (state, deleteUser) => {
       state.deleteUser = deleteUser;
+    },
+    setFilteredProducts: (state, filteredProducts) => {
+      state.filteredProducts = filteredProducts;
     },
   },
   actions: {
@@ -83,6 +87,16 @@ export default createStore({
         console.error("Error adding product:", error);
       }
     },
+    async getFilteredProducts({ commit }, categoryId) {
+      try {
+        const response = await fetch(`${dbConnection}products?category_id=${categoryId}`);
+        const data = await response.json();
+        commit("setFilteredProducts", data);
+      } catch (error) {
+        console.error("Failed to get filtered products", error);
+      }
+    },
+    
     // async deleteProduct(context, prodID) {
     //   try {
     //     context.commit("setDelete", null);
