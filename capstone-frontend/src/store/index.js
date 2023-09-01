@@ -52,14 +52,15 @@ export default createStore({
         console.log("Failed to get products", err.message);
       }
     },
-    async getProduct(context, product_id) {
+    async getProductById(context, product_id) {
       try {
         const response = await fetch(`${dbConnection}products/${product_id}`);
         if(!response.ok) {
           throw Error("Failed to fetch product");
         } else {
           const data = await response.json();
-          const product = data.result[0];
+          console.log(data);
+          const product = data
           context.commit("setProduct", product);
           console.log(product)
         }
@@ -89,7 +90,10 @@ export default createStore({
     },
     async getFilteredProducts({ commit }, categoryId) {
       try {
-        const response = await fetch(`${dbConnection}products?category_id=${categoryId}`);
+        const response = await fetch(`${dbConnection}}products/category/${categoryId}`);
+        if (!response.ok) {
+          throw Error("Failed to fetch filtered products");
+        }
         const data = await response.json();
         commit("setFilteredProducts", data);
       } catch (error) {

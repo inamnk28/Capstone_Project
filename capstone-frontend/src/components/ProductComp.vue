@@ -1,6 +1,6 @@
 <template>
-  <div class="row justify-content-center">
-    <div class="product-card" v-for="product in products" :key="product.product_id">
+  <div class="row justify-content-center my-5">
+    <router-link class="product-card text-decoration-none text-black" v-for="product in products" :key="product.product_id" :to="{ name: 'singleProduct', params: { product_id: product.product_id }}">
       <div class="img">
         <img class="img-fluid" :src="product.primary_image_url" :alt="product.product_name">
       </div>
@@ -8,7 +8,7 @@
         <p class="fs-6"><span class="fw-bold">{{ product.product_name }}</span><br>R {{ product.price }}</p>
         <!-- <p class="fs-5">{{ product.price }}</p> -->
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 <script>

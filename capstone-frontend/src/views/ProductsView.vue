@@ -1,6 +1,6 @@
 <template>
   <!-- <SpinnerComp v-if="isLoading" /> -->
-  <div class="prods">
+  <div class="prods ">
     <div>
     <button @click="filterProducts(0)">All Products</button>
     <button @click="filterProducts(2)">T-Shirts</button>
@@ -18,9 +18,12 @@ export default {
   components: { ProductComp, SpinnerComp },
   computed: {
     products() {
-      // return this.$store.state.products;
-      return this.$store.state.filteredProducts || this.$store.state.products;
+      return this.$store.state.products;
+      // return this.$store.state.filteredProducts || this.$store.state.products;
     },
+    filteredProducts() {
+    return this.$store.state.filteredProducts;
+  },
   },
   mounted() {
     this.$store.dispatch("getProducts");
@@ -39,3 +42,8 @@ export default {
 }
 }
 </script>
+<style scoped>
+/* .prods {
+  padding-inline: auto;
+} */
+</style>

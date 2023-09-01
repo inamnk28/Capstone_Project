@@ -3,7 +3,7 @@
      <div class="container landing overflow-x-hidden">
     <p class="fw-bold mt-3 text-uppercase fs-3 text-center">final reductions</p>
     <p class="fw-bold fs-6 text-center">Limited Stock Available</p>
-    <div class="text-center"><button class="border-0 text-white fw-bold bg-black ">Shop All</button></div>
+    <div class="text-center"><button class="border-0 text-white fw-bold bg-black px-1">Shop All</button></div>
     <div class="row justify-content-center mx-auto mt-5">
       <div class="mx-3 img-box col-lg-4 col-md-4 col-12">
         <div class="img1"></div>
@@ -33,7 +33,7 @@
       <p class="fs-1 fw-bold text-center text-uppercase">now r4900</p>
       <p class="fs-4 fw-bold text-center text-uppercase">clean 180 bee bird black</p>
       <p class="fs-4 fw-bold text-center text-uppercase">was r7090</p>
-      <div class="text-center"><button class="border-0 text-white fw-bold bg-black ">Shop Now</button></div>
+      <div class="text-center"><button class="border-0 text-white fw-bold bg-black px-1">Shop Now</button></div>
     </div>
    </div>
    <div class="row overflow-x-hidden mb-5">
@@ -43,7 +43,7 @@
       <p class="fs-1 fw-bold text-center text-uppercase">now r4900</p>
       <p class="fs-4 fw-bold text-center text-uppercase">clean 180 bee bird black</p>
       <p class="fs-4 fw-bold text-center text-uppercase">was r7090</p>
-      <div class="text-center"><button class="border-0 text-white fw-bold bg-black ">Shop Now</button></div>
+      <div class="text-center"><button class="border-0 text-white fw-bold bg-black px-1">Shop Now</button></div>
     </div>
     <div class="shoe2 col-lg-6 col-md-6 col-12"></div>
    </div>

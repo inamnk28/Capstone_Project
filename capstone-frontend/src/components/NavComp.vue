@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="header w-100">
         <div class="routerlinks">
             <nav class="navbar navbar-expand-lg bg-white w-100">
                 <div class="container-fluid">
@@ -21,12 +21,15 @@
                          <li class="nav-item">
                             <router-link class="nav-link links text-black fw-bold fs-6 text-uppercase" to="/contact">Contact</router-link>
                          </li>
-                         <!-- <li class="nav-item pt-2 mx-1">
+                         <li class="nav-item pt-2 mx-1">
                             <router-link class="bag nav-link links text-black fw-bold fs-6 text-uppercase" to="/cart"></router-link>
                          </li>
                          <li class="nav-item mx-1">
                             <router-link class="search nav-link links text-black fw-bold fs-6 text-uppercase" to="/search"></router-link>
-                         </li> -->
+                         </li>
+                         <li class="nav-item">
+                            <router-link class="user nav-link links text-black fw-bold fs-6 text-uppercase" to="/user"><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/user.png" alt="user"/></router-link>
+                         </li>
                       </ul>
                    </div>
                 </div>
@@ -61,5 +64,8 @@
     background-image: url(https://i.postimg.cc/63dLxJtV/small-search-icon-213735.png);
     background-position: center;
     background-size: cover;
+}
+.user {
+
 }
 </style>
