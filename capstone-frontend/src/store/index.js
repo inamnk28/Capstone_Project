@@ -48,8 +48,24 @@ export default createStore({
           context.commit("setProducts", products);
         }
       } catch (err) {
-        context.commit("Failed to get products", err.message);
+        context.commit("setProducts", null); // or an empty array to clear the products on error
         console.log("Failed to get products", err.message);
+      }
+    },
+    async getAllProducts(context) {
+      try {
+        const response = await fetch(`${dbConnection}products/all`);
+        
+        if (!response.ok) {
+          throw Error("Failed to fetch all products");
+        } else {
+          const data = await response.json();
+          const products = data;
+          context.commit("setProducts", products);
+        }
+      } catch (err) {
+        context.commit("setProducts", null);
+        console.error("Failed to get all products", err.message);
       }
     },
     async getProductById(context, product_id) {
@@ -69,9 +85,54 @@ export default createStore({
         console.log("Failed to get product", err.message);
       }
     },
+    async searchProducts({ commit }, searchQuery) {
+      try {
+        const response = await fetch(`${dbConnection}products/search?query=${searchQuery}`);
+        
+        if (!response.ok) {
+          // Handle non-successful responses, e.g., with an error message or throw an error.
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+    
+        const data = await response.json();
+        
+        if (data) {
+          commit("setProducts", data);
+        } else {
+          // Handle empty responses here, e.g., by setting an empty product list.
+          commit("setProducts", []);
+        }
+      } catch (error) {
+        console.error("Failed to search products", error);
+      }
+    },
+    // async getAllProducts(context) {
+    //   try {
+    //     const response = await fetch(`${dbConnection}products/all`);
+        
+    //     if (!response.ok) {
+    //       throw Error("Failed to fetch all products");
+    //     } else {
+    //       const data = await response.json();
+    //       const products = data;
+    //       context.commit("setProducts", products);
+    //     }
+    //   } catch (err) {
+    //     context.commit("setProducts", null);
+    //     console.error("Failed to get all products", err.message);
+    //   }
+    // async searchProducts({ commit }, searchQuery) {
+    //   try {
+    //     const response = await fetch(`${dbConnection}products/search?query=${searchQuery}`);
+    //     const data = await response.json();
+    //     commit("setProducts", data);
+    //   } catch (error) {
+    //     console.error("Failed to search products", error);
+    //   }
+    // },
     async addProduct(context, newProductData) {
       try {
-        const response = await fetch(`${dbConnection}add-product`, {
+        const response = await fetch(`${dbConnection}products`, {
 
           method: "POST",
           headers: {
@@ -90,7 +151,7 @@ export default createStore({
     },
     async getFilteredProducts({ commit }, categoryId) {
       try {
-        const response = await fetch(`${dbConnection}}products/category/${categoryId}`);
+        const response = await fetch(`${dbConnection}products/category/${categoryId}`);
         if (!response.ok) {
           throw Error("Failed to fetch filtered products");
         }
@@ -101,46 +162,47 @@ export default createStore({
       }
     },
     
-    // async deleteProduct(context, prodID) {
-    //   try {
-    //     context.commit("setDelete", null);
-    //     const response = await fetch(`${dbConnection}products/${prodID}`, {
-    //       method: "DELETE",
-    //     });
-    //     if (!response.ok) {
-    //       throw new Error(`failed to delete product. Status: ${response.status}`);
-    //     }
-    //     context.commit("removeProduct", prodID);
-    //     context.commit("setDelete", "success");
-    //   } catch (error) {
-    //     console.log("error deleting product:", error)
-    //     context.commit("setDelete", "error")
-    //   }
-    // },
+    async deleteProduct(context, product_id) {
+      try {
+        context.commit("setDelete", null);
+        const response = await fetch(`${dbConnection}products/${product_id}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          throw new Error(`failed to delete product. Status: ${response.status}`);
+        }
+        context.commit("deleteProduct", product_id);
+        context.commit("setDelete", "success");
+      } catch (error) {
+        console.log("error deleting product:", error)
+        context.commit("setDelete", "error")
+      }
+    },
     // async updateProduct(context, product) {
     //   try {
-    //     const response = await fetch(`https://full-stack-eomp-7rin.onrender.com/products/${product.prodID}`,
+    //     const response = await fetch(`${dbConnection}products`,
     //     {
     //       method: 'PUT',
     //       headers: {
     //         'Content-Type': 'application/json',
     //       },
     //       body: JSON.stringify({
-    //         prodName: product.prodName,
+    //         product_name: product.product_name,
     //         quantity: product.quantity,
-    //         amount: product.amount,
-    //         Category: product.Category,
-    //         prodUrl: product.prodUrl
+    //         price: product.price,
+    //         description: product.description,
+    //         category_id: product.category_id,
+    //         primary_image_url: product.primary_image_url
     //       }),
     //      }
     //     );
     //     if (!response.ok) {
     //       throw new Error(`failed to update product : ${response.status}`);
     //     }
-    //     this.prodName = '';
+    //     this.product_name = '';
     //     this.quantity = '';
-    //     this.amount = '';
-    //     this.Category = '';
+    //     this.price = '';
+    //     this.category = '';
     //     this.prodUrl = '';
 
     //     context.dispatch('getProducts');

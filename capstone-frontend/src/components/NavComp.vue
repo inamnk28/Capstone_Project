@@ -21,6 +21,9 @@
                          <li class="nav-item">
                             <router-link class="nav-link links text-black fw-bold fs-6 text-uppercase" to="/contact">Contact</router-link>
                          </li>
+                         <li class="nav-item">
+                            <router-link class="nav-link links text-black fw-bold fs-6 text-uppercase" to="/AdminView">Admin</router-link>
+                         </li>
                          <li class="nav-item pt-2 mx-1">
                             <router-link class="bag nav-link links text-black fw-bold fs-6 text-uppercase" to="/cart"></router-link>
                          </li>
@@ -28,7 +31,7 @@
                             <router-link class="search nav-link links text-black fw-bold fs-6 text-uppercase" to="/search"></router-link>
                          </li>
                          <li class="nav-item">
-                            <router-link class="user nav-link links text-black fw-bold fs-6 text-uppercase" to="/user"><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/user.png" alt="user"/></router-link>
+                            <router-link class="user nav-link links text-black fw-bold fs-6 text-uppercase" ></router-link>
                          </li>
                       </ul>
                    </div>
@@ -66,6 +69,11 @@
     background-size: cover;
 }
 .user {
-
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url(https://ibb.co/9GQzCzC);
+    background-position: center;
+    background-size: cover;
 }
 </style>

@@ -2,7 +2,7 @@
     <div class="contact-page">
         <div class="img">
             <div class="contact">
-                <h1 class="text-white text-uppercase">contact</h1>
+                <h1 class="overflow-y-hidden text-white text-uppercase">contact</h1>
             </div>
         </div>
         <div class="container mt-4">
@@ -54,6 +54,7 @@
 }
 h1 {
     font-size: 120px;
+    filter: drop-shadow(15px 5px 2px white);
 }
 form {
     width: 90%;
