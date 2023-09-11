@@ -1,8 +1,5 @@
 const {sign, verify} = require('jsonwebtoken')
 require("dotenv").config()
-const { verify } = require('jsonwebtoken');
-require("dotenv").config();
-
 function createToken(user) {
     return sign({
         emailAdd: user.emailAdd,
@@ -13,29 +10,21 @@ function createToken(user) {
         expiresIn: '1h'
     })
 }
-function verifyAToken(req, res, next) {
-    const token = req.header("authorization");
-
-    // Check if the token is present in the request header
-    if (!token) {
-        return res.status(401).json({ message: "Access denied. Token not provided." });
-    }
-
-    try {
-        // Verify the token using your secret key
-        const decoded = verify(token, process.env.SECRET_KEY);
-
-        // Attach the decoded payload to the request object
-        req.user = decoded;
-
-        // Move to the next middleware or route handler
-        next();
-    } catch (error) {
-        // Handle token verification error
-        return res.status(401).json({ message: "Access denied. Invalid token." });
-    }
+function verifyAToken(req, res, next){
+   try{
+        // Retrieve token from req.headers
+        console.log("Get token from req.headers['authorization']");
+        const token = req.headers["authorization"]
+        console.log(token);
+        next()
+   }catch(e){
+        res.json({
+            status: res.statusCode,
+            msg: e.message
+        })
+   }
 }
 module.exports = {
-    createToken,
-    verifyAToken
+ createToken,
+ verifyAToken
 }

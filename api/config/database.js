@@ -29,7 +29,7 @@ require('dotenv').config();
   user: process.env.dbUser,
   password: process.env.dbPwd,
   database: process.env.dbName,
-  port: process.env.DB_PORT,
+  port: process.env.dbPort,
     multipleStatements: true,
     connectionLimit: 30
 });

@@ -1,9 +1,34 @@
 const db = require("../config/database.js");
 
-const getProducts = (result) => {
-    db.query("SELECT * FROM products", (err, results) => {
+const getProducts = (searchKeyword, result) => {
+    let query = "SELECT * FROM products";
+    const values = [];
+
+    if (searchKeyword) {
+        query += " WHERE (product_name LIKE ? OR description LIKE ?)";
+        values.push(`%${searchKeyword}%`, `%${searchKeyword}%`);
+    }
+
+    db.query(query, values, (err, results) => {
         if (err) {
             console.log(err);
+            result(err, null);
+        } else {
+            result(null, results);
+        }
+    });
+};
+
+
+const getProductsByCategory = (categoryId, result) => {
+    const query = `
+        SELECT * FROM products
+        WHERE category_id = ?;
+    `;
+
+    db.query(query, [categoryId], (err, results) => {
+        if (err) {
+            console.error(err);
             result(err, null);
         } else {
             result(null, results);
@@ -24,6 +49,8 @@ const getProductById = (id, result) => {
 
 const insertProduct = (data, result) => {
     db.query("INSERT INTO products (product_name, category_id, price, description, primary_image_url) VALUES (?, ?, ?, ?, ?)",
+    //    db.query("INSERT INTO products")
+    //    [data],
         [data.product_name, data.category_id, data.price, data.description, data.primary_image_url],
         (err, results) => {
             if (err) {
@@ -65,4 +92,5 @@ module.exports = {
     insertProduct,
     updateProductById,
     deleteProductById,
+    getProductsByCategory
 };

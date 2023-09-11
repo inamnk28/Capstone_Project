@@ -1,4 +1,3 @@
-
 const db = require("../config/database"); //this imprt the db con from config
 const { hash, compare, hashSync } = require("bcrypt");
 const { createToken } = require("../middleware/AuthenticateUser");
@@ -34,7 +33,6 @@ class Users {
       });
     });
   }
-  login(req, res) {}
   async register(req, res) {
     const data = req.body;
     //encrypt password
@@ -55,6 +53,7 @@ class Users {
       let token = createToken(user);
       res.json({
         status: res.statusCode,
+        token,
         msg: "You are now registered.",
       });
     });
@@ -69,12 +68,12 @@ class Users {
         WHERE emailAdd = '${emailAdd}';
         `;
     db.query(query, async (err, result) => {
-      if (err) throw err;
+      if (err) throw err
       if (!result?.length) {
         res.json({
           status: res.statusCode,
-          msg: "You provided a wrong email.",
-        });
+          msg: "You provided a wrong email."
+        })
       } else {
         await compare(userPass, result[0].userPass, (cErr, cResult) => {
           if (cErr) throw cErr;
@@ -93,7 +92,8 @@ class Users {
             res.json({
               status: res.statusCode,
               msg: "Invalid password or you have not registered",
-            });
+            }),
+              console.log(cResult);
           }
         });
       }

@@ -1,4 +1,4 @@
-const { insertCartItem, getCartItemsByUserId, deleteCartItem } = require("../models/cartModel.js");
+const { insertCartItem, getCartItemsByProductId, deleteCartItem } = require("../models/cartModel.js");
 
 // Add item to cart
 const addToCart = (req, res) => {
@@ -15,7 +15,7 @@ const addToCart = (req, res) => {
 // View user's cart
 const viewCart = (req, res) => {
     const user_id = req.params.user_id;
-    getCartItemsByUserId(user_id, (err, results) => {
+    getCartItemsByProductId(user_id, (err, results) => {
         if (err) {
             res.send(err);
         } else {

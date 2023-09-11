@@ -1,14 +1,26 @@
-const { getProducts, getProductById, insertProduct, updateProductById, deleteProductById } = require("../models/productModel.js");
+const { getProducts, getProductById, getProductsByCategory, insertProduct, updateProductById, deleteProductById } = require("../models/productModel.js");
 // Get All Products
 const showProducts = (req, res) => {
-    getProducts((err, results) => {
-        if (err){
-            res.send(err);
-        }else{
+    const searchKeyword = req.query.search;
+    getProducts(searchKeyword, (err, results) => {
+        if (err) {
+            res.status(500).json({ error: 'Internal Server Error' });
+        } else {
             res.json(results);
         }
     });
-}
+};
+// FIlter Products
+const filterProducts = (req, res) => {
+    const categoryId = req.params.category_id;
+    getProductsByCategory(categoryId, (err, results) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+};
 // Get Single Product
 const showProductById = (req, res) => {
     getProductById(req.params.id, (err, results) => {
@@ -22,6 +34,9 @@ const showProductById = (req, res) => {
 // Create New Product
 const createProduct = (req, res) => {
     const data = req.body;
+    if (!data.product_name || !data.category_id || !data.price || !data.description || !data.primary_image_url) {
+        return res.status(400).json({ error: "Missing required fields" });
+    }
     insertProduct(data, (err, results) => {
         if (err){
             res.send(err);
@@ -30,6 +45,9 @@ const createProduct = (req, res) => {
         }
     });
 }
+
+
+
 // Update Product
 const updateProduct = (req, res) => {
     const data  = req.body;
@@ -56,7 +74,9 @@ const deleteProduct = (req, res) => {
 module.exports = {
     showProducts,
     showProductById,
+    filterProducts,
     createProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getProductsByCategory,
 }

@@ -7,6 +7,11 @@ const cartController = require("../controllers/cartController.js");
 const ordersController = require("../controllers/ordersController.js");
 const Users = require('../models/user');
 const users = new Users();
+
+// Middleware
+// router.use(bodyParser.json()); // bodyParser middleware
+// router.use(verifyAToken);
+
 //Import all model's objects
 //User's router
 router.get('/users', (req, res)=>{
@@ -45,14 +50,23 @@ const {
 } = productController;
 
 // Product routes
-router.get("/products", showProducts);
+router.get("/products", productController.showProducts);
 router.get("/products/:id", showProductById);
-router.post("/products", createProduct);
+router.post("/products", bodyParser.json(), createProduct);
 router.put("/products/:id", updateProduct);
+router.patch("/products/:id", updateProduct);
 router.delete("/products/:id", deleteProduct);
 
+const showAllProducts = (req, res) => {
+    showProducts(req, res); // Reuse the existing showProducts handler
+  }; 
+// Get all products route
+router.get('/products/all', showAllProducts);
+// Get products by category
+router.get('/products/category/:category_id', productController.filterProducts); 
+
 // Cart routes
-router.post("/cart", verifyAToken, bodyParser.json(), cartController.addToCart);
+router.post("/cart", verifyAToken, bodyParser.json(), cartController.addToCart); 
 router.get("/cart/:user_id", verifyAToken, cartController.viewCart);
 router.delete("/cart/:cart_id", cartController.removeFromCart);
 
