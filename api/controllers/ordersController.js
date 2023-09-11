@@ -42,24 +42,3 @@ const viewOrderHistory = (req, res) => {
             orderIds.forEach(orderId => {
                 getOrderItemsByOrderId(orderId, (err, items) => {
                     if (err) {
-                        res.send(err);
-                    } else {
-                        const order = orders.find(order => order.order_id === orderId);
-                        order.orderItems = items;
-                        orderHistory.push(order);
-
-                        // Check if all order items are fetched
-                        if (orderHistory.length === orderIds.length) {
-                            res.json(orderHistory);
-                        }
-                    }
-                });
-            });
-        }
-    });
-};
-
-module.exports = {
-    placeOrder,
-    viewOrderHistory,
-};
