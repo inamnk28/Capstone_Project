@@ -27,11 +27,11 @@
                          <li class="nav-item pt-2 mx-1">
                             <router-link class="bag nav-link links text-black fw-bold fs-6 text-uppercase" to="/cart"></router-link>
                          </li>
-                         <li class="nav-item mx-1">
+                         <!-- <li class="nav-item mx-1">
                             <router-link class="search nav-link links text-black fw-bold fs-6 text-uppercase" to="/search"></router-link>
-                         </li>
-                         <li class="nav-item">
-                            <router-link class="user nav-link links text-black fw-bold fs-6 text-uppercase" ></router-link>
+                         </li> -->
+                         <li class="nav-item mx-2 my-2">
+                            <router-link class="user nav-link links text-black fw-bold fs-6 text-uppercase" to="/user"></router-link>
                          </li>
                       </ul>
                    </div>
@@ -69,10 +69,10 @@
     background-size: cover;
 }
 .user {
-    width: 40px;
-    height: 40px;
+    width: 23px;
+    height: 23px;
     border-radius: 50%;
-    background-image: url(https://ibb.co/9GQzCzC);
+    background-image: url(https://i.postimg.cc/Y08fBtVg/flaticon.png);
     background-position: center;
     background-size: cover;
 }

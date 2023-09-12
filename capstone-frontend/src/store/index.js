@@ -1,4 +1,6 @@
 import { createStore } from 'vuex'
+import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const dbConnection = "http://localhost:5000/";
 
@@ -52,22 +54,22 @@ export default createStore({
         console.log("Failed to get products", err.message);
       }
     },
-    async getAllProducts(context) {
-      try {
-        const response = await fetch(`${dbConnection}products/all`);
+    // async getAllProducts(context) {
+    //   try {
+    //     const response = await fetch(`${dbConnection}products/all`);
         
-        if (!response.ok) {
-          throw Error("Failed to fetch all products");
-        } else {
-          const data = await response.json();
-          const products = data;
-          context.commit("setProducts", products);
-        }
-      } catch (err) {
-        context.commit("setProducts", null);
-        console.error("Failed to get all products", err.message);
-      }
-    },
+    //     if (!response.ok) {
+    //       throw Error("Failed to fetch all products");
+    //     } else {
+    //       const data = await response.json();
+    //       const products = data;
+    //       context.commit("setProducts", products);
+    //     }
+    //   } catch (err) {
+    //     context.commit("setProducts", null);
+    //     console.error("Failed to get all products", err.message);
+    //   }
+    // },
     async getProductById(context, product_id) {
       try {
         const response = await fetch(`${dbConnection}products/${product_id}`);
@@ -178,57 +180,86 @@ export default createStore({
         context.commit("setDelete", "error")
       }
     },
-    // async updateProduct(context, product) {
-    //   try {
-    //     const response = await fetch(`${dbConnection}products`,
-    //     {
-    //       method: 'PUT',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({
-    //         product_name: product.product_name,
-    //         quantity: product.quantity,
-    //         price: product.price,
-    //         description: product.description,
-    //         category_id: product.category_id,
-    //         primary_image_url: product.primary_image_url
-    //       }),
-    //      }
-    //     );
-    //     if (!response.ok) {
-    //       throw new Error(`failed to update product : ${response.status}`);
-    //     }
-    //     this.product_name = '';
-    //     this.quantity = '';
-    //     this.price = '';
-    //     this.category = '';
-    //     this.prodUrl = '';
+    async updateProduct(context, product) {
+      try {
+        const response = await fetch(`${dbConnection}products`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            product_name: product.product_name,
+            quantity: product.quantity,
+            price: product.price,
+            description: product.description,
+            category_id: product.category_id,
+            primary_image_url: product.primary_image_url
+          }),
+         }
+        );
+        if (!response.ok) {
+          throw new Error(`failed to update product : ${response.status}`);
+        }
+        this.product_name = '';
+        this.quantity = '';
+        this.price = '';
+        this.category = '';
+        this.prodUrl = '';
 
-    //     context.dispatch('getProducts');
-    //     this.$router.push('/admin'); 
-    //   } catch (error) {
-    //     alert(error);
-    //   }
-    // },
+        context.dispatch('getProducts');
+        this.$router.push('/admin'); 
+      } catch (error) {
+        alert(error);
+      }
+    },
 
 /*===================================================  USERS ACTIONS  =============================================================*/
-// async getUsers(context) {
-//   try {
-//     const response = await fetch(`${dbConnection}users`);
-//     if(!response.ok) {
-//       throw Error("Failed to fetch users");
-//     } else {
-//       const data = await response.json();
-//       const users = data.results;
-//       context.commit("setUsers", users);
-//       console.log(users)
-//     }
-//   } catch (err) {
-//     context.commit("Failed to get users", err.message);
-//     console.log("Failed to get users", err.message);
-//   }
-// },
+async getUsers(context) {
+  try {
+    const response = await fetch(`${dbConnection}Users`);
+    
+    if(!response.ok) {
+      throw Error("Failed to fetch users");
+    } else {
+      const data = await response.json();
+      const users = data;
+      context.commit("setUsers", users);
+    }
+  } catch (err) {
+    context.commit("setUsers", null); // or an empty array to clear the users on error
+    console.log("Failed to get users", err.message);
+  }
+},
+async registerUser(context, payload) {
+  console.log("Reached");
+  try {
+    const response = await axios.post(`${dbConnection}register`, payload);
+  //  console.log("Res: ", res)
+    const user = response.data;
+    context.commit("setUser", user);
+    if (response.status === 200) {
+      await Swal.fire({
+        icon: "success",
+        title: "Registration Successful",
+        text: "You have successfully registered.",
+      });
+      // router.push("/us");
+    } else {
+      await Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: "An error occurred during registration.",
+      });
+    }
+  } catch (e) {
+    await Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: e.message,
+    });
+  }
+},
 // async getUser(context, userID) {
 //   try {
 //     const response = await fetch(`${dbConnection}users/${userID}`);
@@ -245,25 +276,25 @@ export default createStore({
 //     console.log("Failed to get user", err.message);
 //   }
 // },
-// async addUser(context, newUserData) {
-//   try {
-//     const response = await fetch(`${dbConnection}register`, {
+async addUser(context, newUserData) {
+  try {
+    const response = await fetch(`${dbConnection}register`, {
 
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(newUserData),
-//     });
-//     if (!response.ok) {
-//       throw new Error(`Failed to add user. Status: ${response.status}`);
-//     } 
-//     await context.dispatch("getUsers");
-//     console.log("User added successfully!")
-//   } catch (error) {
-//     console.error("Error adding user:", error);
-//   }
-// },
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUserData),
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to add user. Status: ${response.status}`);
+    } 
+    await context.dispatch("getUsers");
+    console.log("User added successfully!")
+  } catch (error) {
+    console.error("Error adding user:", error);
+  }
+},
 // async deleteUser(context, userID) {
 //   try {
 //     context.commit("setDeleteUser", null);

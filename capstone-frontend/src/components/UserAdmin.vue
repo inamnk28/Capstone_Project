@@ -10,7 +10,7 @@
         <td class="button">
             <button class="edit-del my-2 text-white bg-black border-0 fw-bold" @click="deleteUser(user.userID)">Delete</button>
             <br>
-            <button class="edit-del text-white bg-black border-0 fw-bold"><router-link class="text-white text-decoration-none" :to="{ name: 'updateUser', params: { id: user.userID } }">Edit</router-link></button>
+            <!-- <button class="edit-del text-white bg-black border-0 fw-bold"><router-link class="text-white text-decoration-none" :to="{ name: 'updateUser', params: { id: user.userID } }">Edit</router-link></button> -->
         </td>
       </tr>
     </tbody>

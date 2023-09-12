@@ -66,7 +66,7 @@ export default {
     },
     mounted() {
         const product_id = this.$route.params.id
-        this.$store.dispatch("getProduct", product_id);
+        this.$store.dispatch("getProductById", product_id);
     },
 };
 </script>

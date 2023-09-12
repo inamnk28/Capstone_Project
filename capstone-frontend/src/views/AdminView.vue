@@ -47,7 +47,7 @@ export default {
     },
     users() {
       return this.$store.state.users;
-    },
+    }
   },
   methods: {
     // Event handler to reload the page
@@ -57,6 +57,11 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getProducts").then(() => {
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 3000);
+    });
+    this.$store.dispatch("getUsers").then(() => {
       setTimeout(() => {
         this.isLoading = false;
       }, 3000);
