@@ -37,6 +37,14 @@ class Users {
   login(req, res) {}
   async register(req, res) {
     const data = req.body;
+
+    if (!data.userPass) {
+      return res.json ({
+          status: res.statusCode,
+          msg: "Password is required"
+      })
+    }
+
     //encrypt password
     data.userPass = await hash(data.userPass, 15);
     //PAYLOAD means DATA THAT COMES FROM THE USER
