@@ -43,7 +43,7 @@
                         <span>Role</span>
                     </label>
                     <button class="submit fs-4">Submit</button>
-                    <p class="signin text-white fs-5">Already have an account ? <a href="/user/login" class="fs-4">Signin</a> </p>
+                    <p class="signin text-white fs-5">Already have an account ? <router-link  class="fs-4" to="/login">Signin</router-link></p>
 </form>
 
     </div>
