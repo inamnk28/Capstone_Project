@@ -80,7 +80,6 @@ class Users {
       if (err) throw err;
       if (!result?.length) {
         res.status(401).json({
-          status: res.statusCode,
           msg: "You provided a wrong email.",
         });
       } else {
@@ -99,7 +98,6 @@ class Users {
             });
           } else {
             res.status(401).json({
-              status: res.statusCode,
               msg: "Invalid password or you have not registered",
             });
           }
