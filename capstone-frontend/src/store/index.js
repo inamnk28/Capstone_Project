@@ -13,6 +13,8 @@ export default createStore({
     user: null,
     deleteUser: null,
     filteredProducts: null,
+    token: null,
+    items: []
   },
   mutations: {
     setProducts: (state, products) => {
@@ -35,6 +37,9 @@ export default createStore({
     },
     setFilteredProducts: (state, filteredProducts) => {
       state.filteredProducts = filteredProducts;
+    },
+    setToken: (state, token) => {
+      state.token = token;
     },
   },
   actions: {
@@ -257,6 +262,41 @@ async registerUser(context, payload) {
       icon: "error",
       title: "Error",
       text: e.message,
+    });
+  }
+},
+async loginUser(context, payload) {
+  try {
+    const response = await axios.post(`${dbConnection}login`, payload);
+    if (response.status === 200) {
+      const { token, user } = response.data;
+      console.log(response.data);
+      
+      context.commit("setToken", token);
+      console.log(token);
+      context.commit("setUser", user);
+      // Store user data in local storage
+      localStorage.setItem("userToken", token);
+      localStorage.setItem("userData", JSON.stringify(response.data));
+      // return response;
+      // window.location.reload();
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: "You have successfully logged in.",
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "An error occurred during login.",
+      });
+    }
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: error.message,
     });
   }
 },
