@@ -79,7 +79,7 @@ class Users {
     db.query(query, async (err, result) => {
       if (err) throw err;
       if (!result?.length) {
-        res.json({
+        res.status(401).json({
           status: res.statusCode,
           msg: "You provided a wrong email.",
         });
@@ -98,7 +98,7 @@ class Users {
               result: result[0],
             });
           } else {
-            res.json({
+            res.status(401).json({
               status: res.statusCode,
               msg: "Invalid password or you have not registered",
             });
