@@ -1,4 +1,3 @@
-
 const db = require("../config/database"); //this imprt the db con from config
 const { hash, compare, hashSync } = require("bcrypt");
 const { createToken } = require("../middleware/AuthenticateUser");
@@ -34,17 +33,8 @@ class Users {
       });
     });
   }
-  // login(req, res) {}
   async register(req, res) {
     const data = req.body;
-
-    // if (!data.userPass) {
-    //   return res.json ({
-    //       status: res.statusCode,
-    //       msg: "Password is required"
-    //   })
-    // }
-
     //encrypt password
     data.userPass = await hash(data.userPass, 15);
     //PAYLOAD means DATA THAT COMES FROM THE USER
@@ -63,6 +53,7 @@ class Users {
       let token = createToken(user);
       res.json({
         status: res.statusCode,
+        token,
         msg: "You are now registered.",
       });
     });
@@ -77,29 +68,32 @@ class Users {
         WHERE emailAdd = '${emailAdd}';
         `;
     db.query(query, async (err, result) => {
-      if (err) throw err;
+      if (err) throw err
       if (!result?.length) {
-        res.status(401).json({
-          msg: "You provided a wrong email.",
-        });
+        res.json({
+          status: res.statusCode,
+          msg: "You provided a wrong email."
+        })
       } else {
         await compare(userPass, result[0].userPass, (cErr, cResult) => {
           if (cErr) throw cErr;
           // Create a token
-          const token = createToken({
-            emailAdd,
-            userPass,
-          });
+
           if (cResult) {
             res.json({
               msg: "Logged in",
-              token,
+              token: createToken({
+                emailAdd,
+                userPass,
+              }),
               result: result[0],
             });
           } else {
-            res.status(401).json({
+            res.json({
+              status: res.statusCode,
               msg: "Invalid password or you have not registered",
-            });
+            }),
+              console.log(cResult);
           }
         });
       }
