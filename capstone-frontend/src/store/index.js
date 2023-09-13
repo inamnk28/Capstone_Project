@@ -3,7 +3,7 @@ import axios from 'axios';
 import router from '../router/index';
 import Swal from 'sweetalert2'
 
-const dbConnection = "http://localhost:5000/";
+const dbConnection = "https://capstone-backend-api.onrender.com/";
 
 export default createStore({
   state: {

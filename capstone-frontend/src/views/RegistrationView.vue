@@ -1,56 +1,52 @@
 <template>
-  <section class="reg">
-
-    <div class="container mt-5 p-2">
-        <form class="form bg-black" @submit.prevent="registerUser">
-                    <p class="title">Register </p>
-                    <p class="message text-white fs-4">Signup now and get full access to our app. </p>
-                    <div class="flex">
-                        <label>
-                            <input required="" placeholder="" type="text" class="input" v-model="firstName">
-                            <span>Firstname</span>
-                        </label>
-
-                        <label>
-                            <input required="" placeholder="" type="text" class="input" v-model="lastName">
-                            <span>Lastname</span>
-                        </label>
-                    </div>  
-                    <label>
-                            <input required="" placeholder="" type="text" class="input" v-model="gender">
-                            <span>Gender</span>
-                        </label>
-                        <label>
-                            <input required="" placeholder="" type="text" class="input" v-model="userDOB">
-                            <span>Date of Birth</span>
-                        </label>
-                        <label>
-                            <input required="" placeholder="" type="text" class="input" v-model="profileUrl">
-                            <span>ProfileUrl</span>
-                        </label>
-                   
-                    <label>
-                        <input required="" placeholder="" type="email" class="input" v-model="emailAdd">
-                        <span>Email</span>
-                    </label> 
-                        
-                    <label>
-                        <input required="" placeholder="" type="password" class="input" v-model="userPass">
-                        <span>Password</span>
-                    </label>
-                    <label>
-                        <input required="" placeholder="" type="text" class="input" v-model="Role">
-                        <span>Role</span>
-                    </label>
-                    <button class="submit fs-4">Submit</button>
-                    <p class="signin text-white fs-5">Already have an account ? <router-link  class="fs-4" to="/login">Signin</router-link></p>
-</form>
-
+  <div class="container mt-3 p-2">
+    <div class="d-flex justify-content-center">
+    <div>
+        <p class="title">Register</p>
+    <p class="message text-black fs-4">Sign up now and get full access to our app.</p>
+    <form class="form" @submit.prevent="registerUser">
+      <div class="input-group d-flex justify-content-between">
+        <label class="names">
+          <input required placeholder="First Name" type="text" class="marg2 input names" v-model="firstName">
+        </label>
+        
+        <label class="names">
+          <input required placeholder="Last Name" type="text" class="marg input names" v-model="lastName">
+        </label>
+      </div>
+      
+      <div class="input-group">
+        <label class="input-width my-2">
+          <input required placeholder="Gender" type="text" class="input input-width" v-model="gender">
+        </label>
+        
+        <label class="input-width my-2">
+          <input required placeholder="Date of Birth" type="text" class="input input-width" v-model="userDOB">
+        </label>
+      </div>
+      
+      <label class="input-width my-2">
+        <input required placeholder="Profile URL" type="text" class="input input-width" v-model="profileUrl">
+      </label>
+      
+      <label class="input-width my-2">
+        <input required placeholder="Email" type="email" class="input input-width" v-model="emailAdd">
+      </label>
+      
+      <label class="input-width my-2">
+        <input required placeholder="Password" type="password" class="input input-width" v-model="userPass">
+      </label>
+      
+      <label class="input-width my-2">
+        <input required placeholder="Role" type="text" class="input input-width" v-model="Role">
+      </label>
+      
+      <button class="submit fs-4">Submit</button>
+      <p class="signin text-black fs-5">Already have an account? <router-link class="fs-4" to="/login">Sign in</router-link></p>
+    </form>
     </div>
-    <div class="mt-5">
-      <Footer/>
     </div>
-  </section>
+  </div>
 </template>
 <script>
 import router from '../router/index'
@@ -114,3 +110,23 @@ export default{
 }
 };
 </script>
+<style scoped>
+  .form {
+    width: 710px !important;
+  }
+  input {
+    height: 70px !important;
+    border-radius: 0;
+    border-color: black;
+  }
+  .input-width {
+    width: 100%;
+  }
+  .names {
+    width: 345px;
+  }
+  button {
+    width: 150px;
+    height: 50px;
+  }
+</style>
