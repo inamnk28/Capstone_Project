@@ -13,21 +13,21 @@ function createToken(user) {
         expiresIn: '1h'
     })
 }
-function verifyToken(req,res,next){
-    try{
-        const token = req.headers["authorization"]
+// function verifyToken(req,res,next){
+//     try{
+//         const token = req.headers["authorization"]
         
-        next()
+//         next()
 
-    }
-    catch(e){
-        res.json({
-            status: res.statusCode,
-            msg: e.message
-        })
-    }
+//     }
+//     catch(e){
+//         res.json({
+//             status: res.statusCode,
+//             msg: e.message
+//         })
+//     }
  
-} 
+// } 
 // function verifyAToken(req, res, next) {
 //     const token = req.header("authorization");
 
