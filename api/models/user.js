@@ -61,44 +61,51 @@ class Users {
   login(req, res) {
     const { emailAdd, userPass } = req.body;
     const query = `
-        SELECT userID,firstName, lastName,
-        gender, userDOB, userRole, emailAdd, userPass,
-        profileUrl
-        FROM Users
-        WHERE emailAdd = '${emailAdd}';
-        `;
+      SELECT userID, firstName, lastName,
+      gender, userDOB, userRole, emailAdd, userPass,
+      profileUrl
+      FROM Users
+      WHERE emailAdd = '${emailAdd}';
+    `;
     db.query(query, async (err, result) => {
-      if (err) throw err
-      if (!result?.length) {
-        res.json({
-          status: res.statusCode,
-          msg: "You provided a wrong email."
-        })
-      } else {
-        await compare(userPass, result[0].userPass, (cErr, cResult) => {
-          if (cErr) throw cErr;
+      try {
+        if (err) throw err;
+  
+        if (!result?.length) {
+          return res.status(401).json({
+            status: res.statusCode,
+            msg: "You provided a wrong email.",
+          });
+        }
+  
+        const passwordMatch = await compare(userPass, result[0].userPass);
+  
+        if (passwordMatch) {
           // Create a token
-
-          if (cResult) {
-            res.json({
-              msg: "Logged in",
-              token: createToken({
-                emailAdd,
-                userPass,
-              }),
-              result: result[0],
-            });
-          } else {
-            res.json({
-              status: res.statusCode,
-              msg: "Invalid password or you have not registered",
-            }),
-              console.log(cResult);
-          }
+          const token = createToken({
+            emailAdd,
+            userPass,
+          });
+  
+          return res.json({
+            msg: "Logged in",
+            token,
+            result: result[0],
+          });
+        } else {
+          return res.status(401).json({
+            status: res.statusCode,
+            msg: "Invalid password or you have not registered",
+          });
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        return res.status(500).json({
+          msg: "An error occurred during login.",
         });
       }
     });
-  }
+  }  
   updateUser(req, res) {
     const data = req.body;
     if (data.userPass) {
