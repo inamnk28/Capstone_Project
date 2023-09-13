@@ -55,10 +55,10 @@ router.delete("/products/:id", deleteProduct);
 // Get products by category
 router.get('/products/category/:category_id', getProductsByCategory);
 
-// // Cart routes
-// router.post("/cart", verifyAToken, bodyParser.json(), cartController.addToCart);
-// router.get("/cart/:user_id", verifyAToken, cartController.viewCart);
-// router.delete("/cart/:cart_id", cartController.removeFromCart);
+// Cart routes
+router.post("/cart", verifyAToken, bodyParser.json(), cartController.addToCart);
+router.get("/cart/:user_id", verifyAToken, cartController.viewCart);
+router.delete("/cart/:cart_id", cartController.removeFromCart);
 
 // // Orders routes
 // router.post("/orders", verifyAToken, bodyParser.json(), ordersController.placeOrder);
