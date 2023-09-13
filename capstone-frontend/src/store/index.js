@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios';
+import router from '../router/index';
 import Swal from 'sweetalert2'
 
 const dbConnection = "http://localhost:5000/";
@@ -280,6 +281,7 @@ async loginUser(context, payload) {
       localStorage.setItem("userData", JSON.stringify(response.data));
       // return response;
       // window.location.reload();
+      // router.push("/"); // will remove this if
       Swal.fire({
         icon: "success",
         title: "Login Successful",
@@ -293,11 +295,28 @@ async loginUser(context, payload) {
       });
     }
   } catch (error) {
+    if (error.response) {
+      console.error("Error response:", error.response);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.response.data.message,
+      });
+    } else if (error.request) {
+      console.error("No response received:", error.request);
+      Swal.fire({
+        icon: "error",
+        title: "Network Error",
+        text: "Unable to connect to the server.",
+      });
+    } else {
+      console.error("Request setup error:", error.message);
     Swal.fire({
       icon: "error",
       title: "Error",
-      text: error.message,
+      text: "An error occurred during login.",
     });
+    }
   }
 },
 // async getUser(context, userID) {

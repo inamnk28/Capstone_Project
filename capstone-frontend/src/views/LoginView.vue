@@ -32,7 +32,7 @@ import Swal from "sweetalert2";
   },
  
   methods: {
-    async userLogin() {
+  async userLogin() {
   console.log("Reached");
   try {
     const payload = {
@@ -42,15 +42,15 @@ import Swal from "sweetalert2";
     const respond = await this.$store.dispatch("loginUser", payload);
     console.log(payload);
     console.log(respond);
-    if (respond.token && respond.result) {
+    if (respond.status === 200 && respond.data.token && respond.data.result) {
       await Swal.fire({
         icon: "success",
         title: "Logged in Successfully",
         text: "You are now logged in!",
       });
-        this.$router.push("/");
+      router.push("/");
     } else {
-      const errMsg = "Unexpected error";
+      const errMsg = respond.data.message || "Unexpected error";
       await Swal.fire({
         icon: "error",
         title: "Login failed",
