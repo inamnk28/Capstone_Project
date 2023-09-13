@@ -1,8 +1,8 @@
 const db = require("../config/database.js");
 
 const insertCartItem = (data, result) => {
-    db.query("INSERT INTO Cart (user_id, product_id, quantity) VALUES (?, ?, ?)",
-        [data.user_id, data.product_id, data.quantity],
+    db.query("INSERT INTO Cart (userId, product_id, quantity) VALUES (?, ?, ?)",
+        [data.userId, data.product_id, data.quantity],
         (err, results) => {
             if (err) {
                 console.log(err);
@@ -13,8 +13,8 @@ const insertCartItem = (data, result) => {
         });
 };
 
-const getCartItemsByUserId = (user_id, result) => {
-    db.query("SELECT * FROM Cart WHERE user_id = ?", [user_id], (err, results) => {
+const getCartItemsByUserId = (userId, result) => {
+    db.query("SELECT * FROM Cart WHERE userId = ?", [userId], (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);

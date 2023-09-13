@@ -4,7 +4,7 @@ const {verifyAToken} = require('../middleware/AuthenticateUser')
 const router = express.Router()
 const productController = require("../controllers/Product");
 const { getProductsByCategory } = require('../controllers/Product');
-const cartController = require("../controllers/cartController.js");
+const cartController = require("../controllers/cartController");
 // const ordersController = require("../controllers/ordersController.js");
 const Users = require('../models/user');
 const users = new Users();
@@ -55,10 +55,15 @@ router.delete("/products/:id", deleteProduct);
 // Get products by category
 router.get('/products/category/:category_id', getProductsByCategory);
 
+const {
+    viewCart,
+    addToCart,
+    removeFromCart,
+  } = cartController;
 // Cart routes
-router.post("/cart", verifyAToken, bodyParser.json(), cartController.addToCart);
-router.get("/cart/:user_id", verifyAToken, cartController.viewCart);
-router.delete("/cart/:cart_id", cartController.removeFromCart);
+router.post("/cart", verifyAToken, bodyParser.json(),addToCart);
+router.get("/cart/:user_id", verifyAToken, viewCart);
+router.delete("/cart/:cart_id", removeFromCart);
 
 // // Orders routes
 // router.post("/orders", verifyAToken, bodyParser.json(), ordersController.placeOrder);
