@@ -5,11 +5,11 @@
                 <form class="form" @submit.prevent="userLogin">
                     <div class="input-group">
                         <label for="email" class="fs-5 text-white">Email:</label>
-			            <input type="email" name="email" id="email" placeholder="" v-model="emailAdd" required>
+			            <input type="email" name="email" id="email" placeholder="" v-model="form.emailAdd" required>
                     </div>
                     <div class="input-group mt-2">
                         <label for="password" class="fs-5 text-white">Password:</label>
-			            <input type="password" name="password" id="password" placeholder=""  v-model="userPass" required>
+			            <input type="password" name="password" id="password" placeholder=""  v-model="form.userPass" required>
                        
                     </div>
                     <button class="submit mt-4 fs-4" type="submit">Log in</button>
@@ -24,8 +24,10 @@ import Swal from "sweetalert2";
     export default{
       data() {
     return {
-      emailAdd: "",
-      userPass: "",
+      form:{
+        emailAdd: "",
+        userPass: "",
+      }
     };
   },
  
@@ -34,17 +36,19 @@ import Swal from "sweetalert2";
   console.log("Reached");
   try {
     const payload = {
-      emailAdd: this.emailAdd,
-      userPass: this.userPass,
+      emailAdd: this.form.emailAdd,
+      userPass: this.form.userPass,
     };
     const respond = await this.$store.dispatch("loginUser", payload);
-    router.push("/");
+    console.log(payload);
+    console.log(respond);
     if (respond.token && respond.result) {
       await Swal.fire({
         icon: "success",
         title: "Logged in Successfully",
         text: "You are now logged in!",
       });
+        this.$router.push("/");
     } else {
       const errMsg = "Unexpected error";
       await Swal.fire({

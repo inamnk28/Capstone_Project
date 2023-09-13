@@ -56,6 +56,50 @@ h1 {
     font-size: 120px;
     filter: drop-shadow(15px 5px 2px white);
 }
+@media screen and (max-width: 660px) {
+    h1 {
+       font-size: 100px !important;
+    }
+    .img {
+        height: 450px !important
+    }
+    .contact {
+        top: 20% !important;
+    }
+}
+@media screen and (max-width: 530px) {
+    h1 {
+       font-size: 80px !important;
+    }
+    .img {
+        height: 400px !important
+    }
+    .contact {
+        top: 20% !important;
+    }
+}
+@media screen and (max-width: 430px) {
+    h1 {
+       font-size: 50px !important;
+    }
+    .img {
+        height: 300px !important
+    }
+    .contact {
+        top: 20% !important;
+    }
+}
+@media screen and (max-width: 315px) {
+    h1 {
+       font-size: 50px !important;
+    }
+    .img {
+        height: 250px !important
+    }
+    .contact {
+        top: 20% !important;
+    }
+}
 form {
     width: 90%;
     max-width: 600px;
