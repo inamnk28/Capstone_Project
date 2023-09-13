@@ -39,13 +39,13 @@ const addToCart = (req, res) => {
 //     });
 // };
 const viewCart = (req, res) => {
-    const user_id = req.params.user_id;
+    const userId = req.params.userId;
     // Ensure that user_id is valid (e.g., numeric or whatever format you use)
-    if (!user_id) {
+    if (!userId) {
         return res.status(400).json({ error: "Invalid user ID" });
     }
 
-    getCartItemsByProductId(user_id, (err, results) => {
+    getCartItemsByUserId(userId, (err, results) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ error: "Failed to retrieve cart items" });
