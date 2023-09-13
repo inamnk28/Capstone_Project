@@ -61,8 +61,8 @@ const {
     removeFromCart,
   } = cartController;
 // Cart routes
-router.post("/cart", verifyAToken, bodyParser.json(),addToCart);
-router.get("/cart/:user_id", verifyAToken, viewCart);
+router.post("/cart", addToCart);
+router.get("/cart/:user_id", viewCart);
 router.delete("/cart/:cart_id", removeFromCart);
 
 // // Orders routes
