@@ -14,7 +14,7 @@ const { insertCartItem, getCartItemsByUserId, deleteCartItem } = require("../mod
 const addToCart = (req, res) => {
     const data = req.body;
     // Ensure that the data includes userId, product_id, and quantity
-    if (!data.userId || !data.product_id || !data.quantity <= 0) {
+    if (!data.userId || !data.product_id || data.quantity <= 0) {
         return res.status(400).json({ error: "Invalid request data" });
     }
 
