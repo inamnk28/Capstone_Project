@@ -14,7 +14,7 @@ const insertCartItem = (data, result) => {
 };
 
 const getCartItemsByUserId = (userId, result) => {
-    db.query("SELECT * FROM Cart WHERE userId = ?", [userId], (err, results) => {
+    db.query("SELECT C.cart_id, C.quantity, p.product_name, p.price, p.primary_image_url FROM Cart C JOIN products p ON C.product_id = p.product_id WHERE C.userId = ?", [userId], (err, results) => {
         if (err) {
             console.log(err);
             result(err, null);
