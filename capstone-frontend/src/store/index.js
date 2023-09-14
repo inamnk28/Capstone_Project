@@ -15,7 +15,7 @@ export default createStore({
     deleteUser: null,
     filteredProducts: null,
     token: null,
-    cartItems: null,
+    cartItems: [],
     items: []
   },
   mutations: {
@@ -50,6 +50,29 @@ export default createStore({
       console.log('Setting cart items:', cartItems)
       state.cartItems = cartItems;
       localStorage.setItem('cart', JSON.stringify(state.cartItems))
+    },
+    addToCart(state, product) {
+      const existingProduct = state.cartItems.find(
+        (item) => item.product_id === product.product_id
+      );
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        product.quantity = 1;
+        state.cart.push(product);
+      }
+    },
+    updateCartItemQuantity(state, { product_id, quantity }) {
+      const cartItem = state.cartItems.find((item) => item.product_id === product_id);
+      if (cartItem) {
+        cartItem.quantity = quantity;
+      }
+    },
+    removeItem(state, cartID) {
+      const index = state.cart.findIndex((item) => item.cartID === cartID);
+      if (index !== -1) {
+        state.cart.splice(index, 1);
+      }
     },
   },
   actions: {
@@ -405,6 +428,85 @@ async addUser(context, newUserData) {
     } else {
       console.error('User data or userId not found in state');
     }
-  }
+  },
+  async addToCart({ commit, state }, product) {
+    try {
+      if (!state.cart) {
+        console.error("Cart is not initialized.");
+        return false;
+      }
+      const response = await axios.post(`${dbConnection}cart`, product);
+      console.log(product);
+      if (response.status === 200) {
+        commit("addToCart", response.data);
+        console.log("addToCart", response.data);
+        // await dispatch("getCart");
+        Swal.fire({
+          icon: "success",
+          title: "Added to Cart",
+          text: "The product has been added to your cart.",
+        });
+        dispatch("getCart");
+        return true;
+      } else {
+        console.error("Error adding to cart:", response.statusText);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An error occurred while adding the product to your cart.",
+        });
+        return false;
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "An error occurred while adding the product to your cart.",
+      });
+      throw error;
+    }
+  },
+  async removeItem({ commit }, cartID) {
+    try {
+      await axios.delete(`${baseUrl}cart/${cartID}`);
+      // Optionally, you can update the cart in the store here.
+      commit(
+        "setCart",
+        state.cart.filter((item) => item.cartID !== cartID)
+      );
+      console.log(cartID);
+    } catch (error) {
+      console.error("Error removing from cart:", error);
+    }
+  },
+  // async updateCartItemQuantity(
+  //   { commit, state },
+  //   { cartID, prodID, quantity }
+  // ) {
+  //   try {
+  //     const response = await axios.patch(`${dbConnection}cart/${prodID}`, {
+  //       quantity,
+  //     });
+  //     if (response.status === 200) {
+  //       const cartItem = state.cart.find(
+  //         (item) => item.cartID === cartID && item.prodID === prodID
+  //       );
+  //       if (cartItem) {
+  //         cartItem.quantity = quantity;
+  //         commit("setCart", [...state.cart]);
+  //       }
+  //       console.log(cartID);
+  //     } else {
+  //       console.error(
+  //         "Error updating cart item quantity:",
+  //         response.statusText
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error("Error updating cart item quantity:", error);
+  //   }
+  // },
+
   },
 });
