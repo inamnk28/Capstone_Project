@@ -62,7 +62,7 @@ const {
   } = cartController;
 // Cart routes
 router.post("/cart", addToCart);
-router.get("/cart/:user_id", viewCart);
+router.get("/cart/:userId", viewCart);
 router.delete("/cart/:cart_id", removeFromCart);
 
 // // Orders routes
