@@ -32,31 +32,31 @@ import Swal from "sweetalert2";
   },
  
   methods: {
-  async userLogin() {
+   userLogin() {
   console.log("Reached");
   try {
     const payload = {
       emailAdd: this.form.emailAdd,
       userPass: this.form.userPass,
     };
-    const respond = await this.$store.dispatch("loginUser", payload);
-    console.log(payload);
-    console.log(respond);
-    if (respond.status === 200 && respond.data.token && respond.data.result) {
-      await Swal.fire({
-        icon: "success",
-        title: "Logged in Successfully",
-        text: "You are now logged in!",
-      });
-      router.push("/");
-    } else {
-      const errMsg = respond.data.message || "Unexpected error";
-      await Swal.fire({
-        icon: "error",
-        title: "Login failed",
-        text: errMsg,
-      });
-    }
+    this.$store.dispatch("loginUser", payload);
+    // console.log(payload);
+    // console.log(respond);
+    // if (respond.status === 200 && respond.data.token && respond.data.result) {
+    //    Swal.fire({
+    //     icon: "success",
+    //     title: "Logged in Successfully",
+    //     text: "You are now logged in!",
+    //   });
+    //   // router.push({{}});
+    // } else {
+    //   const errMsg = respond.data.message || "Unexpected error";
+    //    Swal.fire({
+    //     icon: "error",
+    //     title: "Login failed",
+    //     text: errMsg,
+    //   });
+    // }
   } catch (err) {
     console.error("Error while logging in: ", err);
   }

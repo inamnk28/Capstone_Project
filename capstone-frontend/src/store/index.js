@@ -15,11 +15,15 @@ export default createStore({
     deleteUser: null,
     filteredProducts: null,
     token: null,
+    cartItems: null,
     items: []
   },
   mutations: {
     setProducts: (state, products) => {
       state.products = products;
+    },
+    setError(state, errorMessage) {
+      state.error = errorMessage;
     },
     setProduct: (state, product) => {
       state.product = product;
@@ -42,8 +46,14 @@ export default createStore({
     setToken: (state, token) => {
       state.token = token;
     },
+    setCartItems(state, cartItems) {
+      console.log('Setting cart items:', cartItems)
+      state.cartItems = cartItems;
+      localStorage.setItem('cart', JSON.stringify(state.cartItems))
+    },
   },
   actions: {
+    ///-------------------------------Products Actions-----------------------------------------------//
     async getProducts(context) {
       try {
         const response = await fetch(`${dbConnection}products`);
@@ -60,22 +70,6 @@ export default createStore({
         console.log("Failed to get products", err.message);
       }
     },
-    // async getAllProducts(context) {
-    //   try {
-    //     const response = await fetch(`${dbConnection}products/all`);
-        
-    //     if (!response.ok) {
-    //       throw Error("Failed to fetch all products");
-    //     } else {
-    //       const data = await response.json();
-    //       const products = data;
-    //       context.commit("setProducts", products);
-    //     }
-    //   } catch (err) {
-    //     context.commit("setProducts", null);
-    //     console.error("Failed to get all products", err.message);
-    //   }
-    // },
     async getProductById(context, product_id) {
       try {
         const response = await fetch(`${dbConnection}products/${product_id}`);
@@ -114,30 +108,6 @@ export default createStore({
         console.error("Failed to search products", error);
       }
     },
-    // async getAllProducts(context) {
-    //   try {
-    //     const response = await fetch(`${dbConnection}products/all`);
-        
-    //     if (!response.ok) {
-    //       throw Error("Failed to fetch all products");
-    //     } else {
-    //       const data = await response.json();
-    //       const products = data;
-    //       context.commit("setProducts", products);
-    //     }
-    //   } catch (err) {
-    //     context.commit("setProducts", null);
-    //     console.error("Failed to get all products", err.message);
-    //   }
-    // async searchProducts({ commit }, searchQuery) {
-    //   try {
-    //     const response = await fetch(`${dbConnection}products/search?query=${searchQuery}`);
-    //     const data = await response.json();
-    //     commit("setProducts", data);
-    //   } catch (error) {
-    //     console.error("Failed to search products", error);
-    //   }
-    // },
     async addProduct(context, newProductData) {
       try {
         const response = await fetch(`${dbConnection}products`, {
@@ -220,6 +190,8 @@ export default createStore({
       }
     },
 
+
+    
 /*===================================================  USERS ACTIONS  =============================================================*/
 async getUsers(context) {
   try {
@@ -281,12 +253,12 @@ async loginUser(context, payload) {
       localStorage.setItem("userData", JSON.stringify(response.data));
       // return response;
       // window.location.reload();
-      // router.push("/"); // will remove this if
       Swal.fire({
         icon: "success",
         title: "Login Successful",
         text: "You have successfully logged in.",
       });
+      router.push({name: "home"}); 
     } else {
       Swal.fire({
         icon: "error",
@@ -408,7 +380,31 @@ async addUser(context, newUserData) {
 //     alert(error);
 //   }
 // },
-  },
-  modules: {
+
+
+// --------------------------- CART ACTIONS -----------------------------------------------------//
+  async getCartItems(context, userID) {
+    console.log('store - userId:', userID);
+    if(userID) {
+      try {
+        const response = await fetch(`${dbConnection}cart/${userID}`);
+        // if(!response.ok) {
+        //   throw Error("failed to retrieve cart items");
+        // }
+        const {cartItems} = await response.json();
+        console.log("GetCartItems: ", cartItems);
+        console.log(cartItems);
+        // console.log(data.cartItems);
+        // const cartItems = data.cartItems;
+        context.commit("setCartItems", cartItems);
+        
+
+      } catch (error) {
+        context.commit("setError", error.message);
+      }
+    } else {
+      console.error('User data or userId not found in state');
+    }
   }
-})
+  },
+});
