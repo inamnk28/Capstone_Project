@@ -40,8 +40,9 @@ const addToCart = (req, res) => {
 // };
 const viewCart = (req, res) => {
     const userId = req.params.userId;
+    console.log("userId from params:", userId);
     // Ensure that user_id is valid (e.g., numeric or whatever format you use)
-    if (!userId) {
+    if (!userId || isNaN(userId)) {
         return res.status(400).json({ error: "Invalid user ID" });
     }
 
