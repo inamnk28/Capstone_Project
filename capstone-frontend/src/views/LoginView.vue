@@ -13,7 +13,7 @@
                        
                     </div>
                     <button class="submit mt-4 fs-4" type="submit">Log in</button>
-                    <p class="signin mt-4">Don't have an account ? <a href="/user/register" class="fs-4">Register</a> </p>
+                    <p class="signin mt-4">Don't have an account ? <router-link to="/user" class="fs-4">Register</router-link> </p>
                 </form>
             </div>
     </div>

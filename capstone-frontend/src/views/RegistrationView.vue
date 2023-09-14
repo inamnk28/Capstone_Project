@@ -2,15 +2,15 @@
   <div class="container mt-3 p-2">
     <div class="d-flex justify-content-center">
     <div>
-        <p class="title">Register</p>
-    <p class="message text-black fs-4">Sign up now and get full access to our app.</p>
+        <p class="title fw-bold fs-5">Register</p>
+    <p class="message text-black fw-bold fs-3">Sign up now and get full access to our app.</p>
     <form class="form" @submit.prevent="registerUser">
       <div class="input-group d-flex justify-content-between">
-        <label class="names">
+        <label class="names my-2">
           <input required placeholder="First Name" type="text" class="marg2 input names" v-model="firstName">
         </label>
         
-        <label class="names">
+        <label class="names my-2">
           <input required placeholder="Last Name" type="text" class="marg input names" v-model="lastName">
         </label>
       </div>
@@ -41,7 +41,7 @@
         <input required placeholder="Role" type="text" class="input input-width" v-model="Role">
       </label>
       
-      <button class="submit fs-4">Submit</button>
+      <button class="fw-bold border-0 bg-black text-white submit fs-4">Submit</button>
       <p class="signin text-black fs-5">Already have an account? <router-link class="fs-4" to="/login">Sign in</router-link></p>
     </form>
     </div>
@@ -111,8 +111,13 @@ export default{
 };
 </script>
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&display=swap');
   .form {
-    width: 710px !important;
+    width: 100%;
+    max-width: 710px;
+  }
+  .container {
+    font-family: montserrat !important;
   }
   input {
     height: 70px !important;
@@ -122,11 +127,25 @@ export default{
   .input-width {
     width: 100%;
   }
+  .input-group {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
   .names {
-    width: 345px;
+    width: 345px !important; /* Adjust as needed for spacing between inputs */
   }
   button {
-    width: 150px;
+    width: 100%;
+    max-width: 150px;
     height: 50px;
+  }
+   @media (max-width: 768px) {
+    .names {
+      width: 100% !important;
+    }
+    .input-group {
+      flex-direction: column;
+    }
   }
 </style>
