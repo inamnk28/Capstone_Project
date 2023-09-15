@@ -11,22 +11,16 @@
 
     <!-- Right -->
     <div>
-      <a href="" class="me-4 link-secondary">
-        <i class="text-white fab fa-facebook-f"></i>
-      </a>
-      <a href="" class="me-4 link-secondary">
+      <a href="https://twitter.com/NkabiInam28" target="_blank" class="me-4 link-secondary">
         <i class="text-white fab fa-twitter"></i>
       </a>
-      <a href="" class="me-4 link-secondary">
-        <i class="text-white fab fa-google"></i>
-      </a>
-      <a href="" class="me-4 link-secondary">
+      <a href="https://www.instagram.com/inam0628/" target="_blank" class="me-4 link-secondary">
         <i class="text-white fab fa-instagram"></i>
       </a>
-      <a href="" class="me-4 link-secondary">
+      <a href="https://www.linkedin.com/in/inam-nkabi-46a677263/" target="_blank" class="me-4 link-secondary">
         <i class="text-white fab fa-linkedin"></i>
       </a>
-      <a href="" class="me-4 link-secondary">
+      <a href="https://github.com/inamnk28" target="_blank" class="me-4 link-secondary">
         <i class="text-white fab fa-github"></i>
       </a>
     </div>
@@ -43,11 +37,10 @@
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
           <!-- Content -->
           <h6 class="text-white text-uppercase fw-bold mb-4 overflow-y-hidden">
-            <i class="text-white fas fa-gem me-3 text-secondary "></i>Company name
+            <i class="text-white fas fa-gem me-3 text-secondary "></i>RefinedGentBoutique
           </h6>
           <p class="text-white">
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+            RefinedGentBoutique offers a curated collection of high-quality men's clothing for the modern and sophisticated gentleman, available online.
           </p>
         </div>
         <!-- Grid column -->
@@ -58,53 +51,25 @@
           <h6 class="text-white text-uppercase fw-bold mb-4 overflow-y-hidden">
             Products
           </h6>
-          <p>
-            <a href="#!" class="text-white">Angular</a>
-          </p>
-          <p>
-            <a href="#!" class="text-white">React</a>
-          </p>
-          <p>
-            <a href="#!" class="text-white">Vue</a>
-          </p>
-          <p>
-            <a href="#!" class="text-white">Laravel</a>
-          </p>
+            <p href="#!" class="text-white">Sneakers</p>          
+            <p href="#!" class="text-white">T-Shirts</p>
+            <p href="#!" class="text-white">Sweater & Jackets</p>
         </div>
         <!-- Grid column -->
 
         <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="overflow-y-hidden text-white text-uppercase fw-bold mb-4">
-            Useful links
-          </h6>
-          <p>
-            <a href="#!" class="text-white">Pricing</a>
-          </p>
-          <p>
-            <a href="#!" class="text-white">Settings</a>
-          </p>
-          <p>
-            <a href="#!" class="text-white">Orders</a>
-          </p>
-          <p>
-            <a href="#!" class="text-white">Help</a>
-          </p>
-        </div>
         <!-- Grid column -->
 
         <!-- Grid column -->
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4 text-white overflow-y-hidden">Contact</h6>
-          <p class="text-white"><i class="fas fa-home me-3 text-secondary text-white"></i> New York, NY 10012, US</p>
+          <p class="text-white"><i class="fas fa-home me-3 text-secondary text-white"></i> Crossroads, Cape Town, 7750</p>
           <p class="text-white">
             <i class="text-white fas fa-envelope me-3 text-secondary"></i>
-            info@example.com
+            inamnkabi1@gmail.com
           </p>
-          <p class="text-white"><i class=" text-white fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
-          <p class="text-white"><i class="text-white fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
+          <p class="text-white"><i class=" text-white fas fa-phone me-3 text-secondary"></i> + 27 734 5678</p>
         </div>
         <!-- Grid column -->
       </div>
@@ -115,10 +80,15 @@
 
   <!-- Copyright -->
   <div class="text-white text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
-    © 2021 Copyright:
-    <a class="text-white fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    © 2023 Copyright:
+    <span class="text-white fw-bold">RefinedGentBoutique</span>
   </div>
   <!-- Copyright -->
 </footer>
 <!-- Footer -->
 </template>
+<style scoped>
+footer {
+  font-family: montserrat;
+}
+</style>

@@ -224,6 +224,7 @@ async getUsers(context) {
       throw Error("Failed to fetch users");
     } else {
       const data = await response.json();
+      console.log(data);
       const users = data;
       context.commit("setUsers", users);
     }
@@ -245,7 +246,7 @@ async registerUser(context, payload) {
         title: "Registration Successful",
         text: "You have successfully registered.",
       });
-      // router.push("/us");
+      router.push({name: "login"}); 
     } else {
       await Swal.fire({
         icon: "error",
@@ -349,22 +350,22 @@ async addUser(context, newUserData) {
     console.error("Error adding user:", error);
   }
 },
-// async deleteUser(context, userID) {
-//   try {
-//     context.commit("setDeleteUser", null);
-//     const response = await fetch(`${dbConnection}users/${userID}`, {
-//       method: "DELETE",
-//     });
-//     if (!response.ok) {
-//       throw new Error(`failed to delete user. Status: ${response.status}`);
-//     }
-//     context.commit("removeUser", userID);
-//     context.commit("setDeleteUser", "success");
-//   } catch (error) {
-//     console.log("error deleting user:", error)
-//     context.commit("setDeleteUser", "error")
-//   }
-// },
+async deleteUser(context, userID) {
+  try {
+    context.commit("setDeleteUser", null);
+    const response = await fetch(`${dbConnection}user/${userID}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error(`failed to delete user. Status: ${response.status}`);
+    }
+    context.commit("removeUser", userID);
+    context.commit("setDeleteUser", "success");
+  } catch (error) {
+    console.log("error deleting user:", error)
+    context.commit("setDeleteUser", "error")
+  }
+},
 // async updateUser(context, user) {
 //   try {
 //     const response = await fetch(`https://full-stack-eomp-7rin.onrender.com/users/${user.userID}`,

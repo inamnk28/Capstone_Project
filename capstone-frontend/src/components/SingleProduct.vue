@@ -1,5 +1,5 @@
 <template>
-    <div  v-if="product" class="single-view row justify-content-center my-5 w-100">
+    <div  v-if="product" class="single-view row justify-content-center my-3 mx-0 w-100">
         <div class="product col-lg-6 col-md-6 col-12 d-flex justify-content-center mb-5" >
             <img class="img-fluid" :src="product.primary_image_url" alt="">
         </div>

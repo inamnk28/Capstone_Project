@@ -2,19 +2,11 @@
   <!-- <SpinnerComp v-if="isLoading" /> -->
   <div class="prods ">
     <div class="filter-sort-search d-flex justify-content-center flex-wrap">
-    <!-- <div class="price-filter">
-        <div class="inputs">
-          <input type="number" v-model="minPrice" id="minPrice" class="minPrice" placeholder="0.00">
-          <p><i class="uil uil-minus"></i></p>
-          <input type="number" v-model="maxPrice" id="maxPrice" class="maxPrice" placeholder="600.00">
-        </div>
-        <button @click="applyPriceFilter">Save</button>
-      </div> -->
       <div class="search box">
         <button class="btn-search"><i class="fas fa-search"></i></button>
         <input type="text" v-model="searchQuery"  class="input-search" placeholder="Type to Search...">
       </div>
-      <div class="category-filter d-flex mx-3">
+      <div class="category-filter d-flex mx-3 flex-wrap justify-content-center">
         <p class="mx-2 fw-bold fs-6" @click="filterProducts(0)">All Products</p>
         <p class="mx-2 fw-bold fs-6" @click="filterProducts(2)">T-Shirts</p>
         <p class="mx-2 fw-bold fs-6" @click="filterProducts(1)">Sneakers</p>
@@ -26,6 +18,18 @@
           <option value="ascending">Ascending</option>
           <option value="descending">Descending</option>
         </select>
+      </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="price-filter">
+        <div class="inputs">
+          <input type="number" v-model="minPrice" id="minPrice" class="border-2 rounded minPrice" placeholder="Minimum Price">
+          <p><i class="uil uil-minus"></i></p>
+          <input type="number" v-model="maxPrice" id="maxPrice" class="border-2 rounded maxPrice" placeholder="Maximum Price">
+        </div>
+        <div class="d-flex justify-content-center mt-2">
+           <button class="border-0 bg-black text-white fw-bold" @click="applyPriceFilter">Filter</button>
+        </div>
       </div>
   </div>
   <ProductComp :products="filteredProducts" />
@@ -47,17 +51,50 @@ export default {
       if(this.selectedCategory !== 0) {
         productView = productView.filter(product => product.category_id === this.selectedCategory)
       }
-      if(this.shouldApplyPriceFilter && this.minPrice !== null && this.maxPrice !== null) {
-        productView = productView.filter(product => 
-          product.price >= this.minPrice && product.price <= this.maxPrice
-        );
-         this.shouldApplyPriceFilter = false;
+       if (this.shouldApplyPriceFilter && this.minPrice !== null && this.maxPrice !== null) {
+        // Additional debugging
+        console.log("Filtering products by price...");
+        console.log("Min Price:", this.minPrice);
+        console.log("Max Price:", this.maxPrice);
+
+        productView = productView.filter(product => {
+          // Additional debugging
+          console.log("Product Price:", product.price);
+
+          // Ensure all values are numbers and within the desired range
+          const validPrice = !isNaN(product.price) && !isNaN(this.minPrice) && !isNaN(this.maxPrice) &&
+            product.price >= parseFloat(this.minPrice) && product.price <= parseFloat(this.maxPrice);
+          return validPrice;
+        });
+
+        // Additional debugging
+        console.log("Filtered Products:", productView);
+
+        // this.shouldApplyPriceFilter = false;
       }
       if (this.selectedSortOrder === 'ascending') {
-        productView.sort((a, b) => a.price - b.price);
-      } else if (this.selectedSortOrder === 'descending') {
-        productView.sort((a, b) => b.price - a.price);
-      }
+  productView.sort((a, b) => {
+    const nameA = a.product_name.toLowerCase();
+    const nameB = b.product_name.toLowerCase();
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
+  });
+} else if (this.selectedSortOrder === 'descending') {
+  productView.sort((a, b) => {
+    const nameA = a.product_name.toLowerCase();
+    const nameB = b.product_name.toLowerCase();
+    if (nameA < nameB) return 1;
+    if (nameA > nameB) return -1;
+    return 0;
+  });
+}
+
+      // if (this.selectedSortOrder === 'ascending') {
+      //   productView.sort((a, b) => a.price - b.price);
+      // } else if (this.selectedSortOrder === 'descending') {
+      //   productView.sort((a, b) => b.price - a.price);
+      // }
       if (this.searchQuery) {
         productView = productView.filter(product => 
           product.product_name.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -91,6 +128,10 @@ export default {
       return this.$store.state.products;
       // return this.$store.state.filteredProducts || this.$store.state.products;
     },
+    applyPriceFilter() {
+        this.shouldApplyPriceFilter = true;
+        // this.shouldApplyPriceFilter = false;
+      },
 
 }}
 

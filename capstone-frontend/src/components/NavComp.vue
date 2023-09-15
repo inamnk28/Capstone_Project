@@ -52,6 +52,27 @@
 .navbar-nav {
     margin-left: 25% !important;
 }
+.nav-link {
+  display: inline-block;
+  margin-right: 20px;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.1em;
+  line-height: 1.3;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(190, 121, 13, 0.3);
+  -moz-transition: ease 0.3s;
+  -o-transition: ease 0.3s;
+  -webkit-transition: ease 0.3s;
+  transition: ease 0.3s;
+}
+.nav-link:hover, .nav-link:focus {
+  color: #be790d;
+  border-bottom: 10px solid rgba(190, 121, 13, 0.3);
+}
+.nav-link:active {
+  border-bottom: 20px solid rgba(190, 121, 13, 0.3);
+}
 .bag {
     width: 25px;
     height: 25px;
@@ -60,6 +81,11 @@
     background-position: center;
     background-size: cover;
 }
+ @media screen and (max-width: 991px) {
+      .navbar-nav {
+         margin-left: 0 !important;
+      }
+   }
 .search {
     width: 40px;
     height: 40px;
