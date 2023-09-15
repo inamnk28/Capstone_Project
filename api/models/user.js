@@ -109,7 +109,7 @@ class Users {
   updateUser(req, res) {
     const data = req.body;
     if (data.userPass) {
-      data.userPass = hashSync(data.userPass, 5);
+      data.userPass = hashSync(data.userPass, 15);
     }
     const query = `
         UPDATE Users
