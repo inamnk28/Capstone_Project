@@ -17,7 +17,7 @@
                     <label for="name"><img width="20" height="20" src="https://img.icons8.com/material-outlined/24/user--v1.png" alt="user--v1"/>Your Name</label>
                  </div>
                  <div class="inputs">
-                    <input type="text" id="number" required>
+                    <input type="number" id="number" required>
                     <label for="number"><img width="20" height="20" src="https://img.icons8.com/ios/50/phone--v1.png" alt="phone--v1"/>Phone No.</label>
                  </div>
                  <div class="inputs">

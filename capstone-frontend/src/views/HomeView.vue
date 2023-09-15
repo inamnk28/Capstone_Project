@@ -8,45 +8,43 @@
       <div class="mx-3 img-box col-lg-4 col-md-4 col-12">
         <div class="img1"></div>
         <div class="little-desc">
-          <p class="fw-bold">JR Men Footwear 1812 A <br><span class="mt-0 text-decoration-line-through">R6,960.00</span><span class="fw-bolder"> R4,683.00</span></p>
+          <p class="fw-bold">JR Men Footwear 1812 A <br><span class="fw-bolder"> R4,683.00</span></p>
         </div>
       </div>
       <div class="mx-3 img-box col-lg-4 col-md-4 col-12">
         <div class="img2"></div>
         <div class="little-desc">
-          <p class="fw-bold">Dsquared2 Mens T-Shirt<br><span class="mt-0 text-decoration-line-through">R5,960.00</span><span class="fw-bolder"> R2,713.00</span></p>
+          <p class="fw-bold">Dsquared2 Mens T-Shirt<br><span class="fw-bolder"> R2,713.00</span></p>
         </div>
       </div>
       <div class="mx-3 img-box col-lg-4 col-md-4 col-12">
         <div class="img3"></div>
         <div class="little-desc">
-          <p class="fw-bold">Antony Morato Sneaker<br><span class="mt-0 text-decoration-line-through">R4,460.00</span><span class="fw-bolder"> R2,750.00</span></p>
+          <p class="fw-bold">Antony Morato Sneaker<br><span class="fw-bolder"> R2,750.00</span></p>
         </div>
       </div>
     </div>
    </div>
-   <div class="row overflow-x-hidden">
+   <router-link to="/products" class="text-black text-decoration-none row overflow-x-hidden">
     <div class="shoe1 col-lg-6 col-md-6 col-12"></div>
     <div class="desc col-lg-6 col-md-6 col-12 bg bg-light text-center">
       <p class="fs-3 text-center">Final Reductions</p>
       <p class="fs-1 fw-bold text-center">Axel Arigato</p>
-      <p class="fs-1 fw-bold text-center text-uppercase">now r4900</p>
+      <p class="fs-1 fw-bold text-center text-uppercase">r4900</p>
       <p class="fs-4 fw-bold text-center text-uppercase">clean 180 bee bird black</p>
-      <p class="fs-4 fw-bold text-center text-uppercase">was r7090</p>
-      <div class="text-center"><button class="border-0 text-white fw-bold bg-black px-1">Shop Now</button></div>
+      <router-link to="/products" class="text-decoration-none text-black text-center"><button class="border-0 text-white fw-bold bg-black px-1">Shop Now</button></router-link>
     </div>
-   </div>
-   <div class="row overflow-x-hidden mb-5">
+   </router-link>
+   <router-link to="/products" class="text-decoration-none text-black row overflow-x-hidden mb-5">
     <div class="desc col-lg-6 col-md-6 col-12 bg bg-light text-center">
       <p class="fs-3 text-center">Final Reductions</p>
       <p class="fs-1 fw-bold text-center">Axel Arigato</p>
-      <p class="fs-1 fw-bold text-center text-uppercase">now r4900</p>
+      <p class="fs-1 fw-bold text-center text-uppercase">r4900</p>
       <p class="fs-4 fw-bold text-center text-uppercase">clean 180 bee bird black</p>
-      <p class="fs-4 fw-bold text-center text-uppercase">was r7090</p>
-      <div class="text-center"><button class="border-0 text-white fw-bold bg-black px-1">Shop Now</button></div>
+      <router-link to="/products" class="text-decoration-none text-black text-center"><button class="border-0 text-white fw-bold bg-black px-1">Shop Now</button></router-link>
     </div>
     <div class="shoe2 col-lg-6 col-md-6 col-12"></div>
-   </div>
+   </router-link>
   </div>
 </template>
 

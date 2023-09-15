@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-3 p-2">
+  <div class="cont mt-3 p-2">
     <div class="d-flex justify-content-center">
     <div>
         <p class="title fw-bold fs-5">Register</p>
@@ -7,42 +7,42 @@
     <form class="form" @submit.prevent="registerUser">
       <div class="input-group d-flex justify-content-between">
         <label class="names my-2">
-          <input required placeholder="First Name" type="text" class="marg2 input names" v-model="firstName">
+          <input required placeholder="First Name" type="text" class="bg-transparent marg2 input names" v-model="firstName">
         </label>
         
         <label class="names my-2">
-          <input required placeholder="Last Name" type="text" class="marg input names" v-model="lastName">
+          <input required placeholder="Last Name" type="text" class="bg-transparent marg input names" v-model="lastName">
         </label>
       </div>
       
       <div class="input-group">
         <label class="input-width my-2">
-          <input required placeholder="Gender" type="text" class="input input-width" v-model="gender">
+          <input required placeholder="Gender" type="text" class="bg-transparent input input-width" v-model="gender">
         </label>
         
         <label class="input-width my-2">
-          <input required placeholder="Date of Birth" type="text" class="input input-width" v-model="userDOB">
+          <input required placeholder="Date of Birth" type="text" class="bg-transparent input input-width" v-model="userDOB">
         </label>
       </div>
       
       <label class="input-width my-2">
-        <input required placeholder="Profile URL" type="text" class="input input-width" v-model="profileUrl">
+        <input required placeholder="Profile URL" type="text" class="bg-transparent input input-width" v-model="profileUrl">
       </label>
       
       <label class="input-width my-2">
-        <input required placeholder="Email" type="email" class="input input-width" v-model="emailAdd">
+        <input required placeholder="Email" type="email" class="bg-transparent input input-width" v-model="emailAdd">
       </label>
       
       <label class="input-width my-2">
-        <input required placeholder="Password" type="password" class="input input-width" v-model="userPass">
+        <input required placeholder="Password" type="password" class="bg-transparent input input-width" v-model="userPass">
       </label>
       
       <label class="input-width my-2">
-        <input required placeholder="Role" type="text" class="input input-width" v-model="Role">
+        <input required placeholder="Role" type="text" class="bg-transparent input input-width" v-model="Role">
       </label>
       
       <button class="fw-bold border-0 bg-black text-white submit fs-4">Submit</button>
-      <p class="signin text-black fs-5">Already have an account? <router-link class="fs-4" to="/login">Sign in</router-link></p>
+      <p class="signin text-white fs-5 fw-bold">Already have an account? <router-link class="fs-4" to="/login">Sign in</router-link></p>
     </form>
     </div>
     </div>
@@ -116,13 +116,21 @@ export default{
     width: 100%;
     max-width: 710px;
   }
-  .container {
+  .cont {
     font-family: montserrat !important;
+    background-image: url(https://i.postimg.cc/xdM1k6c5/register-form.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
   input {
     height: 70px !important;
     border-radius: 0;
     border-color: black;
+  }
+  ::placeholder {
+    color: black;
+    font-weight: bold;
   }
   .input-width {
     width: 100%;
